@@ -31,7 +31,13 @@ function BuildTimetable() {
       jwt,
     );
 
-    navigate(`/timetables/${result.data.id}`);
+    if (result.error == null) {
+      navigate(`/timetables/${result.data.id}`);
+    } else {
+      alert(result.error);
+    }
+
+
   };
 
   const addEvent = (event: ScheduledEvent) => {
