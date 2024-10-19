@@ -72,8 +72,8 @@ function Timetable({ events }: TimetableProps) {
                         eventsForCell.length > 1
                           ? "Timetable__cell--event Timetable__cell--multiple-events"
                           : eventsForCell.length === 1
-                          ? "Timetable__cell--event"
-                          : ""
+                            ? "Timetable__cell--event"
+                            : ""
                       }`}
                     >
                       {eventsForCell.map((event, index) => (

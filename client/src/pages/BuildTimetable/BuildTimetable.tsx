@@ -68,9 +68,7 @@ function BuildTimetable() {
               selectedEvents={selectedEvents}
               removeEvent={removeEvent}
               createTimetable={createTimetable}
-
             />
-
           </Section>
         )}
         <Section title="Draft Timetable">

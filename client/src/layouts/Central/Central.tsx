@@ -24,8 +24,12 @@ function Central({ title, children }: Props) {
         <div className="Central__page__footer">
           <div className="Central__page__footer__contact">
             <a href="https://carleton.ca/">Carleton Site</a>
-            <a href="https://carleton.ca/academics/support/">Carleton Services</a>
-            <a href="https://www.uottawa.ca/study/undergraduate-studies/canadian-university-transfers">Transfer uOttawa</a>
+            <a href="https://carleton.ca/academics/support/">
+              Carleton Services
+            </a>
+            <a href="https://www.uottawa.ca/study/undergraduate-studies/canadian-university-transfers">
+              Transfer uOttawa
+            </a>
           </div>
           <div className="Central__page__footer__release">Release: 8.10.1</div>
           <div className="Central__page__footer__copyright">

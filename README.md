@@ -9,34 +9,34 @@ The project template utilizes [React](https://react.dev/), [TypeScript](https://
 ## Table of Contents
 
 - [Event Setup Instructions](#event-setup-instructions)
-    - [Windows Setup](#windows-setup)
-    - [Mac Setup](#mac-setup)
-    - [Project Setup](#project-setup)
-        - [Create a Github Repository for the Project](#create-a-github-repository-for-the-project)
-        - [Client Setup](#client-setup)
-        - [Service Setup](#service-setup)
+  - [Windows Setup](#windows-setup)
+  - [Mac Setup](#mac-setup)
+  - [Project Setup](#project-setup)
+    - [Create a Github Repository for the Project](#create-a-github-repository-for-the-project)
+    - [Client Setup](#client-setup)
+    - [Service Setup](#service-setup)
 - [Documentation](#documentation)
-    - [Important Files and Folders](#important-files-and-folders)
-        - [Client](#client)
-        - [Service](#service)
-    - [Views](#views)
-        - [Login Page - `/`](#login-page---)
-        - [Menu Page - `/`](#menu-page---)
-        - [Build Timetable Page - `/timetables/build`](#build-timetable-page---timetablesbuild)
-        - [Timetables Page - `/timetables`](#timetables-page---timetables)
-        - [View Timetable Page - `/timetables/:id`](#view-timetable-page---timetablesid)
-    - [API Routes](#api-routes)
-        - [Login - `POST /login`](#login---post-login)
-        - [All Scheduled Events - `GET /scheduledEvents`](#all-scheduled-events---get-scheduledevents)
-        - [Account's Timetables - `GET /timetables`](#accounts-timetables---get-timetables)
-        - [Create Timetable - `POST timetables`](#create-timetable---post-timetables)
-        - [View Timetable - `GET /timetables/:id`](#view-timetable---get-timetablesid)
-    - [Database Schema](#database-schema)
-        - [Account](#account)
-        - [Course](#course)
-        - [Scheduled Event](#scheduled-event)
-        - [Timetable](#timetable)
-        - [Timetable Event](#timetable-event)
+  - [Important Files and Folders](#important-files-and-folders)
+    - [Client](#client)
+    - [Service](#service)
+  - [Views](#views)
+    - [Login Page - `/`](#login-page---)
+    - [Menu Page - `/`](#menu-page---)
+    - [Build Timetable Page - `/timetables/build`](#build-timetable-page---timetablesbuild)
+    - [Timetables Page - `/timetables`](#timetables-page---timetables)
+    - [View Timetable Page - `/timetables/:id`](#view-timetable-page---timetablesid)
+  - [API Routes](#api-routes)
+    - [Login - `POST /login`](#login---post-login)
+    - [All Scheduled Events - `GET /scheduledEvents`](#all-scheduled-events---get-scheduledevents)
+    - [Account's Timetables - `GET /timetables`](#accounts-timetables---get-timetables)
+    - [Create Timetable - `POST timetables`](#create-timetable---post-timetables)
+    - [View Timetable - `GET /timetables/:id`](#view-timetable---get-timetablesid)
+  - [Database Schema](#database-schema)
+    - [Account](#account)
+    - [Course](#course)
+    - [Scheduled Event](#scheduled-event)
+    - [Timetable](#timetable)
+    - [Timetable Event](#timetable-event)
 
 # Event Setup Instructions
 
@@ -48,8 +48,8 @@ If you are a Mac or Linux user, instead follow the [Mac Setup](#mac-setup) and t
 
 Both guides will have you set up [Homebrew](https://brew.sh/) to manage dependencies. Homebrew will help you install additional software like Node.js, Git, Gh, etc.
 
-
 ## Windows Setup
+
 In Powershell or Command Prompt, run the following commands
 
 1. Install WSL
@@ -69,6 +69,7 @@ wsl --set-default-version 2
 ```
 wsl --install -d ubuntu
 ```
+
 **Note: You will need to create a Linux user**
 
 4. Install Homebrew
@@ -102,6 +103,7 @@ brew install git
 ```
 
 ## Mac Setup
+
 In the Terminal, run the following commands
 
 1. Install Homebrew
@@ -206,7 +208,6 @@ The project template for this year is a recreation of the **infamously hard to u
 
 Students will be tasked with recreating and improving many of the core components of the application.
 
-
 ## Important Files and Folders
 
 ### Client
@@ -265,22 +266,20 @@ const createTimetable = async () => {
   const result = await ServiceAPI.createTimetable(
     new Date().toISOString(),
     selectedEvents.map((event) => event.id.toString()),
-      jwt,
-    );
+    jwt,
+  );
 
-    navigate(`/timetables/${result.data.id}`);
+  navigate(`/timetables/${result.data.id}`);
 };
 ```
 
 ![image](https://github.com/user-attachments/assets/a881efdc-ef92-423e-afb6-24c589b02396)
-
 
 ### View Timetable Page - `/timetables/:id`
 
 The following page simple allows you to view a previously created timetable.
 
 ![image](https://github.com/user-attachments/assets/cafa24e3-ef51-47ae-8b6b-c40ba8987d0f)
-
 
 ## API Routes
 
@@ -324,7 +323,7 @@ Example Response:
 
 This route returns a list of available scheduled events.
 
-Example Response: 
+Example Response:
 
 ```json
 {
@@ -415,10 +414,7 @@ Example Payload:
 ```json
 {
   "name": "Example Timetable Name",
-  "scheduledEventIds": [
-    "986",
-    "987"
-  ]
+  "scheduledEventIds": ["986", "987"]
 }
 ```
 
