@@ -8,6 +8,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install modules
       run: |
+        cd client
         npm install
     - name: Run Prettier
       run: |
