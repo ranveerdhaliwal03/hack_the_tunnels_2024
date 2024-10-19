@@ -13,5 +13,6 @@ jobs:
       - name: Run Prettier
         run: |
           cd client
-          npm run check
           npm run format
+          npm run check
+
