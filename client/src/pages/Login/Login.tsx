@@ -2,16 +2,28 @@ import { useState } from "react";
 import { useAccountContext } from "../../context";
 import { Base as Layout } from "@/layouts";
 import "./Login.style.scss";
+// import test from "node:test";
+// import { text } from "stream/consumers";
 
 function Login() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [message, setMessage] = useState(null);
   const { login } = useAccountContext();
 
   const attemptLogin = async () => {
     try {
-      const message = await login("admin@email.com", "password");
-      setMessage(message);
+      if (username == "admin@email.com" && password == "password") {
+        const new_message = await login(username, password);
+        setMessage(new_message);
+      } else {
+        alert("GET OUT UOTTAWA STUDENT!!!!");
+      }
     } catch (error) {
+      setMessage({
+        text: "Invalid email or password. Please try again.",
+        type: "error",
+      });
       console.log(error);
     }
   };
@@ -34,8 +46,18 @@ function Login() {
           </div>
           {message && <p>{message}</p>}
           <div className="Login__panel__content__input">
-            <input type="text" placeholder="MyCarletonOne username"></input>
-            <input type="password" placeholder="Password"></input>
+            <input
+              type="text"
+              placeholder="MyCarletonOne username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            ></input>
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            ></input>
           </div>
           <div className="Login__panel__content__checkbox">
             <input type="checkbox"></input>
