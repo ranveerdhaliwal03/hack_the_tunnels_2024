@@ -13,7 +13,8 @@
     &__title {
       margin-top: 1.67rem;
       margin-bottom: 1.5rem;
-      font-weight: normal;
+      font-family: verdana;
+      font-weight: bold;
       font-size: 1.3em;
     }
 
@@ -21,7 +22,10 @@
       font-weight: bold;
       font-size: 80%;
       text-align: left;
-
+      &__contact {
+        display:flex; 
+        flex-direction: column;
+      }
       &__release {
         text-transform: uppercase;
       }

@@ -7,8 +7,10 @@ import { useAccountContext } from "@/context";
 import { Timetable } from "@/infrastructure/ServiceAPI";
 import { scheduledEventToCalendarBlock } from "@/utils";
 import "./ViewTimetable.style.scss";
+import { ResultsSection } from "../BuildTimetable/ResultsSection";
 
 function ViewTimetable() {
+  const { name } = useParams<{ name: string }>();
   const { jwt } = useAccountContext();
   const { id } = useParams<{ id: string }>();
   const [timetable, setTimetable] = useState<Timetable | null>(null);
@@ -18,6 +20,7 @@ function ViewTimetable() {
     const fetchTimetable = async () => {
       try {
         const result = await ServiceAPI.fetchTimetable(id, jwt);
+        console.log(result);
         setTimetable(result);
       } catch (error) {
         setError(error.message);
@@ -35,7 +38,7 @@ function ViewTimetable() {
   }
 
   return (
-    <Layout title={"Student Timetable"}>
+    <Layout title={timetable.name}>
       <TimetableView
         events={timetable.items.map((item: any) =>
           scheduledEventToCalendarBlock(item),
