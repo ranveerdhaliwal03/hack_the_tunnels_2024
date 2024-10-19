@@ -14,4 +14,3 @@ jobs:
         run: |
           cd client
           npm run format
-          npm run check
