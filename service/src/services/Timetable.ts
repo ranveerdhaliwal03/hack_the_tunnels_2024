@@ -1,4 +1,4 @@
-import { Timetable } from "@prisma/client";
+import { ScheduledEvent, Timetable } from "@prisma/client";
 import { prisma } from "../db";
 import { Result, Ok, Err } from "ts-results";
 import { AccountService } from ".";
@@ -8,6 +8,27 @@ export const createTimetable = async (
   name: string,
   scheduledEventIds: string[],
 ): Promise<Result<Timetable, Error>> => {
+
+  let scheduledEventIdsInts: number[] = []
+
+  scheduledEventIds.forEach((element) => scheduledEventIdsInts.push(parseInt(element)));
+
+  const scheduledEvents = await prisma.scheduledEvent.findMany({
+    where: {
+      id: { in: scheduledEventIdsInts }
+    }
+  })
+
+  if (scheduledEvents.length > 1) {
+    for (let i = 0; i < scheduledEvents.length; i++) {
+      for (let j = i + 1; j < scheduledEvents.length; j++) {
+        if (isConflictingTime(scheduledEvents[i], scheduledEvents[j])) {
+          return Err(new Error("Courses have conflicting times."));
+        }
+      }
+    }
+  }
+
   const account = await AccountService.findByEmail(email);
 
   if (account === null) {
@@ -92,3 +113,23 @@ export const getAccountTimetables = async (
 
   return Ok(timetables);
 };
+
+function isConflictingTime(scheduledEvent: ScheduledEvent, scheduledEventOther: ScheduledEvent) {
+  if (!scheduledEvent.days.split(',').some(r => scheduledEvent.days.split(',').includes(r))) {
+    return false;
+  }
+  if (scheduledEvent.startTime == 'NA' || scheduledEventOther.startTime == 'NA') {
+    return;
+  }
+  if (scheduledEvent.startTime <= scheduledEventOther.startTime) {
+    if (scheduledEvent.endTime > scheduledEventOther.startTime) {
+      return true;
+    }
+    return false;
+  } else {
+    if (scheduledEventOther.endTime > scheduledEvent.startTime) {
+      return true;
+    }
+    return false;
+  }
+}
